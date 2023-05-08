@@ -1,0 +1,53 @@
+pragma solidity ^0.8.0;
+
+contract MarioBros {
+    
+    uint256 score;
+    uint256 lives;
+    uint256 level;
+    
+    struct Character {
+        uint256 x;
+        uint256 y;
+    }
+    
+    struct Enemy {
+        uint256 x;
+        uint256 y;
+    }
+    
+    Character public player;
+    Enemy public goomba;
+    
+    constructor() {
+        score = 0;
+        lives = 3;
+        level = 1;
+        player.x = 0;
+        player.y = 0;
+        goomba.x = 5;
+        goomba.y = 0;
+    }
+    
+    function moveLeft() public {
+        player.x -= 1;
+    }
+    
+    function moveRight() public {
+        player.x += 1;
+    }
+    
+    function jump() public {
+        player.y += 1;
+    }
+    
+    function checkCollision() public {
+        if (player.x == goomba.x && player.y == goomba.y) {
+            lives -= 1;
+        }
+    }
+    
+    function nextLevel() public {
+        level += 1;
+    }
+}
